@@ -1,12 +1,12 @@
 from datetime import datetime
-Incidents = []
+incidents = []
 
 
-class Incident():
+class Incident:
 
     incident_id = 1
 
-    def __init__(self, created_by, Type, location, status, image, video, comment):
+    def __init__(self, created_by=None, Type=None, location=None, status=None, image=None, video=None, comment=None):
 
         self.created_on = datetime.now().replace(second=0, microsecond=0)
         self.created_by = created_by  # represents the user who created this record
@@ -34,3 +34,8 @@ class Incident():
             video=self.video,
             comment=self.comment
         )
+
+    def get_incident_by_id(self, id):
+        for incident in incidents:
+            if incident.id == id:
+                return incident
