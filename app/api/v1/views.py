@@ -44,3 +44,8 @@ class PostIncidents(Resource):
         return {"incident": "created successfully"}, 201
 
         print(f"{incident.Type}")
+
+
+class GetIncidents(Resource):
+    def get(self):
+        return {"Incidents": [Incident.serializer() for Incident in Incidents]}
