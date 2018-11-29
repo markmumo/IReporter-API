@@ -70,7 +70,7 @@ class Get_specific_incident(Resource):
     parsing.add_argument("comment", type=str, required=True,
                          help="This field is required")
 
-    """ get specific incident """
+    """ GET specific incident """
 
     def get(self, id):
         incident = Incident().get_incident_by_id(id)
@@ -78,6 +78,8 @@ class Get_specific_incident(Resource):
             return {"Message": "incident does not exit"}, 404
         else:
             return {"Incident": incident.serializer()}, 200
+
+    """ GET incident by id """
 
 
 class Get_incident_by_id(Resource):
@@ -89,12 +91,41 @@ class Get_incident_by_id(Resource):
         else:
             return {"Incident": incident.serializer()}, 200
 
+    """" DELETE specific incident """
 
-    """ deleting specific incident """
     def delete(self, id):
         delete_incident = Incident().get_incident_by_id(id)
         if not delete_incident:
             return {"message": "incident does not exist"}, 404
         else:
             incidents.remove(delete_incident)
-            return {"Message":"Incident deleted successfully"}, 200
+            return {"Message": "Incident deleted successfully"}, 200
+
+    """ (PATCH) update specific incident """
+
+    def patch(self, id):
+
+        data = Get_specific_incident.parsing.parse_args()
+
+        created_by = data['created_by']
+        Type = data['Type']
+        location = data['location']
+        status = data['status']
+        image = data['image']
+        video = data['video']
+        comment = data['comment']
+
+        specific_incident = Incident().get_incident_by_id(id)
+
+        if not specific_incident:
+            return {"message": "This incident does not exist"}, 404
+        else:
+            specific_incident.created_by = created_by
+            specific_incident.Type = Type
+            specific_incident.location = location
+            specific_incident.status = status
+            specific_incident.image = image
+            specific_incident.video = video
+            specific_incident.comment = comment
+
+            return {"Incident": specific_incident.serializer()}, 200
