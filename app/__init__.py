@@ -9,16 +9,19 @@ def create_app():
     app = Flask(__name__)
     api = Api(app)
 
-    """create incidents"""
+    """(POST) create incidents"""
     api.add_resource(PostIncidents, "/api/v1/incident")
 
-    """get all incidents"""
+    """GET all incidents"""
     api.add_resource(Incidents, "/api/v1/incident")
 
-    """get incident by id"""
+    """GET incident by id"""
     api.add_resource(Get_incident_by_id, "/api/v1/incident/<int:id>")
 
-    """ user can get their specific incidents """
+    """GET specific incidents """
     api.add_resource(Get_specific_incident, "/api/v1/incident/<int:id>")
+
+    """"DELETE incident by id"""
+    api.add_resource(Get_incident_by_id, "/api/v1/incident/<int:id>")
 
     return app
