@@ -47,9 +47,9 @@ git clone https://github.com/markmumo/IReporter-API
 ## Running the application
 
 ```bash
-$ export FLASK_APP = run.py
+$ export FLASK_APP=run.py
 
-$ export MODE = development
+$ export MODE=development
 
 $ flask run
 ```
