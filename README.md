@@ -48,16 +48,33 @@ git clone https://github.com/markmumo/IReporter-API
 ## Running the application
 
 ```bash
-$ export FLASK_APP = run.py
+$ export FLASK_APP=run.py
 
-$ export MODE = development
+$ export MODE=development
 
 $ flask run
 ```
 
 ## Endpoints Available
 
+| Method | Endpoint                  | Description                            | Roles       |
+| ------ | ------------------------- | -------------------------------------- | ----------- |
+| POST   | /api/v1/auth/Sign_up      | register a user.                       | User        |
+| POST   | /api/v1/auth/Sign_in      | login a user.                          | User        |
+| GET    | /api/v1/users             | get all users.                         | Admin       |
+| POST   | /api/v1/incident          | create an incident record.             | User        |
+| GET    | /api/v1/incident          | Get all incident records.              | Admin/users |
+| GET    | /api/v1/incident/<int:id> | Get a specific incident.               | Admin/users |
+| PATCH  | /api/v1/incident/<int:id> | Edit a specific incident field by. id. | Admin/users |
+| DELETE | /api/v1/incident/<int:id> | Delete a specific incident by id.      | Admin/users |
+
 ### Testing
+
+nosetests
+
+- Testing with coverage
+
+nosetests --with-coverage --cover-package=app
 
 ### Author
 
