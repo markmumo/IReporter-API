@@ -1,6 +1,6 @@
 import json
 
-from .base_test import BaseTest
+from app.tests.v1.base_test import BaseTest
 
 
 class TestIncident(BaseTest):
