@@ -4,10 +4,9 @@ from instance.config import app_config
 from app.api.v1.views import PostIncidents, Incidents, Get_incident_by_id
 
 
-def create_app(config_mode):
+def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object(app_config[config_mode])
-    app.config.from_pyfile('config.py', silent=True)
+    app.config.from_object(app_config[config_name])
 
     api = Api(app)
 
@@ -19,8 +18,5 @@ def create_app(config_mode):
 
     """GET incident by id"""
     api.add_resource(Get_incident_by_id, "/api/v1/incident/<int:id>")
-
-    # """GET specific incidents """
-    # api.add_resource(Get_specific_incident, "/api/v1/incident/<int:id>")
 
     return app

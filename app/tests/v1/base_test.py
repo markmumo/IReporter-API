@@ -1,19 +1,20 @@
 from unittest import TestCase
-
 import json
-
 from app import create_app
 
 
 class BaseTest(TestCase):
+
     def setUp(self):
-        self.app = create_app('testing')
-        self.client = self.app.test_client()
+        app = create_app("testing")
+        self.client = app.test_client()
+        self.app_context = app.app_context()
+        self.app_context.push()
 
         self.create_incident = {
             "created_by": "mark",
             "Type": "redflag",
-            "location": "j1.1018° S, 37.0144° Euja",
+            "location": "j1.1018° S, 37.0144° juja",
             "status": "draft",
             "image": "corruption.png",
             "video": "corruption.webm",
