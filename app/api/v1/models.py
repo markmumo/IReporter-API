@@ -45,12 +45,13 @@ class Incident:
 class User:
     user_id = 1
 
-    def __init__(self, firstname=None, lastname=None, othernames=None, email=None, phoneNumber=None, username=None, is_admin=None):
+    def __init__(self, firstname=None, lastname=None, othernames=None, email=None, password=None, phoneNumber=None, username=None, is_admin=None):
 
         self.firstname = firstname
         self.lastname = lastname
         self.othernames = othernames
         self.email = email
+        self.password = password
         self.phoneNumber = phoneNumber
         self.username = username
         self.is_admin = is_admin
@@ -64,6 +65,7 @@ class User:
             lastname=self.lastname,
             othernames=self.othernames,
             email=self.email,
+            password=self.password,
             phoneNumber=self.phoneNumber,
             username=self.username,
             is_admin=self.is_admin
@@ -73,9 +75,9 @@ class User:
         for user in Users:
             if user.id == Id:
                 return user
-            # else:
 
-    def get_user_by_username(self, username):
+    @staticmethod
+    def get_user_by_username(username):
         for user in Users:
             if user.username == username:
                 return user
@@ -84,5 +86,5 @@ class User:
         for user in Users:
             if user.email == email:
                 return user
-            # else:
-            #     return {"Message": "user does not exist"}, 404
+            else:
+                return {"Message": "user does not exist"}, 404
