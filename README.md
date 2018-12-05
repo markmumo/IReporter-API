@@ -5,6 +5,7 @@
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 [![Build Status](https://travis-ci.org/markmumo/IReporter-API.svg?branch=develop)](https://travis-ci.org/markmumo/IReporter-API)
+[![codecov](https://codecov.io/gh/markmumo/IReporter-API/branch/develop/graph/badge.svg)](https://codecov.io/gh/markmumo/IReporter-API)
 
 # IReporter-API
 
