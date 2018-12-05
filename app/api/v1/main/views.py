@@ -30,13 +30,11 @@ class PostIncidents(Resource):
         video = data["video"]
         comment = data["comment"]
 
-        validating = Validate()
-
-        if not validating.is_string(created_by):
+        if not Validate.is_string(created_by):
 
             return {"message": "must be a string"}, 400
 
-        if not validating.is_string(Type):
+        if not Validate.is_string(Type):
             return {"type": "must be a string"}, 400
 
         incident = Incident(created_by, Type, location,
