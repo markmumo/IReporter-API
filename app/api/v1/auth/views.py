@@ -60,7 +60,7 @@ class Sign_up(Resource):
         if not Validate.validate_password(password):
             return {"Message": "Password must be at least 8 characters"}, 400
         if User().get_user_by_email(email):
-            return {"Message": f"A user with {email} already exists"}, 400
+            return {"Message":"email adress already taken"}, 400
         if User().get_user_by_username(username):
             return {"Message": f"{username} already taken, please try another"}, 400
 
