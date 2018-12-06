@@ -58,3 +58,96 @@ class TestIncident(BaseTest):
         )
 
         self.assertEqual(response.status_code, 200)
+
+    def test_invalid_username(self):
+        """ Test if username is invalid """
+
+        response = self.client.post(
+            "api/v1/auth/Sign_up",
+            data=json.dumps(self.invalid_username_data),
+            headers={'content-type': 'application/json'}
+        )
+
+        self.assertEqual(json.loads(response.data)[
+                         "Message"], "username can only contain alphanumeric characters only and a minimum of 4 characters")
+        self.assertEqual(response.status_code, 400)
+
+    def test_email_exists(self):
+        '''test for signup with an existing email address'''
+
+        self.signup()
+
+        response = self.client.post(
+            "api/v1/auth/Sign_up",
+            data=json.dumps(self.email_exists),
+            headers={'content-type': 'application/json'}
+        )
+        print(response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.data)[
+                         "Message"], "email adress already taken")
+
+    def test_validate_firstname(self):
+        '''test for a valid firstname'''
+
+        self.signup()
+
+        response = self.client.post(
+            "api/v1/auth/Sign_up",
+            data=json.dumps(self.invalid_firstname),
+            headers={"content-type": "application/json"}
+        )
+        print(response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.data)[
+                         "Message"], "Please enter valid firstname")
+
+    def test_validate_phone_number(self):
+        '''test for a valid phone number'''
+
+        self.signup()
+
+        response = self.client.post(
+            "api/v1/auth/Sign_up",
+            data=json.dumps(self.invalid_phone_number),
+            headers={"content-type": "application/json"}
+        )
+        print(response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.data)[
+                         "Message"], "please put valid phone number")
+
+    def test_validate_lastname(self):
+        '''test for a valid lastname'''
+
+        self.signup()
+
+        response = self.client.post(
+            "api/v1/auth/Sign_up",
+            data=json.dumps(self.invalid_lastname),
+            headers={"content-type": "application/json"}
+
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.data)[
+                         "Message"], "Please enter valid lastname")
+
+    def test_validate_othernames(self):
+        '''test for valid othernames'''
+
+        self.signup()
+
+        response = self.client.post(
+            "api/v1/auth/Sign_up",
+            data=json.dumps(self.invalid_othernames),
+            headers={"content-type": "application/json"}
+
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.data)[
+                         "Message"], "Please enter valid names")
+
+    def test_signup(self):
+        '''test for signing up'''
