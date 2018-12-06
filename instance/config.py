@@ -1,7 +1,11 @@
 
+import os
+
+
 class Config:
     """Parent configuration class."""
     DEBUG = False
+    DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 class DevelopmentConfig(Config):
@@ -13,6 +17,7 @@ class TestingConfig(Config):
     """Configurations for Testing, with a separate test database."""
     TESTING = True
     DEBUG = True
+    DATABASE_URL = os.getenv("DATABASE_TEST_URL")
 
 
 class ProductionConfig(Config):
