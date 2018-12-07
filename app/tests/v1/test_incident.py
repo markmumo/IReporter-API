@@ -1,6 +1,10 @@
 import json
+from json import dumps
+from wsgiref import headers
 
 from app.tests.v1.base_test import BaseTest
+
+from app.api.v1.auth.views import Sign_up
 
 
 class TestIncident(BaseTest):
@@ -85,7 +89,7 @@ class TestIncident(BaseTest):
         print(response.data)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(json.loads(response.data)[
-                         "Message"], "email adress already taken")
+                         "Message"], "email address already taken")
 
     def test_validate_firstname(self):
         '''test for a valid firstname'''
@@ -149,5 +153,14 @@ class TestIncident(BaseTest):
         self.assertEqual(json.loads(response.data)[
                          "Message"], "Please enter valid names")
 
-    def test_signup(self):
-        '''test for signing up'''
+
+# def test_validate_othernames(self):
+#     '''test for valid othernames'''
+
+#     self.Sign_up()
+
+#     response = self.client.post(
+#         "ap1/v1/auth/Sign_up",
+#         data=json.dumps(self.invalid_othernames),
+#         headers={"content-type": "application/json"}
+#     )

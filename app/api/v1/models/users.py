@@ -47,4 +47,4 @@ class User:
             if user.email == email:
                 return user
             else:
-                return {"Message": "user does not exist"}, 404
+                return None
